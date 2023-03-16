@@ -4,7 +4,7 @@ namespace Architecture.Models
 {
     public class CourseRepository : ICourseRepository
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly AppDbContext _appDbContext; //initialises appdbcontext 
 
         public CourseRepository(AppDbContext appDbContext)
         {

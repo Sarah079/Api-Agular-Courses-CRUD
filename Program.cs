@@ -16,9 +16,9 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(); // allows swagger to be activeated 
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); //using models folder to get the appdbcontext
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
 var app = builder.Build();

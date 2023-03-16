@@ -2,13 +2,14 @@
 
 namespace Architecture.Models
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:DbContext // 
     {
         public AppDbContext(DbContextOptions<AppDbContext> options): base (options) //dbContext is important for code first application 
         { 
+            
         }     
 
-        public DbSet<Course> Courses { get; set; }
+        public DbSet<Course> Courses { get; set; } //new database set 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

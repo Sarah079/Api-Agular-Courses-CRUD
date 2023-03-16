@@ -6,6 +6,7 @@ namespace Architecture.Models
     {
         [Key]
         public int CourseId { get; set; }
+        // data annotation example: [Required] (not nullable)
         public string Name { get; set; }
         public string Description { get; set; }
         public string Duration { get; set; }
