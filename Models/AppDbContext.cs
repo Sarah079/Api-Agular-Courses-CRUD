@@ -2,7 +2,7 @@
 
 namespace Architecture.Models
 {
-    public class AppDbContext:DbContext // 
+    public class AppDbContext:DbContext 
     {
         public AppDbContext(DbContextOptions<AppDbContext> options): base (options) //dbContext is important for code first application 
         { 

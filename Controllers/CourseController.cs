@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
 
-//create 
+//checking whether course data has been passed and whether the api is successful
 namespace Architecture.Controllers
 {
     [Route("api/[controller]")]
@@ -19,7 +19,7 @@ namespace Architecture.Controllers
             _courseRepository = courseRepository;
         }
 
-        //-------------------------------------------------------GET - (read) --------------------------------------------------
+        //GET - (read) given 
         [HttpGet]
         [Route("GetAllCourses")]
         public async Task<IActionResult> GetAllCourses() //async
@@ -35,28 +35,25 @@ namespace Architecture.Controllers
             }
         }
 
-        //-----------------------------------------------------POST - (add)-----------------------------------------------------
+        //POST - (add)
+        //1. if result code == success (200) "added"
+        //2. else msg and catch err msg
         [HttpPost]
         [Route("AddCourse")]
-        public async Task<IActionResult> AddCourse() 
+        public async Task<IActionResult> AddCourse(CourseViewModel course) //(pass data)
         {
             try
             {
-
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal Server Error. Please contact support.");
-            }
-        }
-
-        //-----------------------------------------------------PUT - (edit) ----------------------------------------------------
-        [HttpPut]
-        [Route("EditCourse")]
-        public async Task<IActionResult> EditCourse()
-        {
-            try
-            {
+                var results = await _courseRepository.AddCourse(course);
+                if(results == 200)
+                {
+                    return Ok("Added " + course.Name + "for " + course.Duration);
+                    
+                }
+                else
+                {
+                    return BadRequest("Course not added. Please retry");
+                }
                 
             }
             catch (Exception)
@@ -65,10 +62,57 @@ namespace Architecture.Controllers
             }
         }
 
-        //-----------------------------------------------------DELETE - (delete)------------------------------------------------
+        //PUT - (edit)
+        //1. get course to edit
+        //2. put edited course 
+        [HttpGet]
+        [Route("GetCourse/{id}")]
+        public async Task<IActionResult> GetCourse(int CourseId)
+        {
+            try
+            {
+                var results = await _courseRepository.GetCourse(CourseId);
+                
+                if (results.LocationId == 200)
+                {
+                    return Ok(results);
+                }
+                else
+                {
+                    return BadRequest("Course not found. Please retry");
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error. Please contact support.");
+            }
+        }
+        [HttpPut]
+        [Route("EditCourse/{id}")]
+        public async Task<IActionResult> EditCourse( CourseViewModel course, int CourseId)
+        {
+            try
+            {
+                var results = await _courseRepository.EditCourse(course, CourseId);
+                if (results == 200)
+                {
+                    return Ok(course.Name + "Updated" );                    
+                }
+                else
+                {
+                    return BadRequest("Course not updated. Please retry");
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error. Please contact support.");
+            }
+        }
+
+        //DELETE - (delete)
         [HttpDelete]
         [Route("DeleteCourse")]
-        public async Task<IActionResult> DeleteCourse()
+        public async Task<IActionResult> DeleteCourse(CourseViewModel course)
         {
             try
             {
