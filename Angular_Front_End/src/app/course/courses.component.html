@@ -1,0 +1,26 @@
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<body>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          
+              <tr *ngFor="let course of courses">
+                <td>{{course.name}}</td>
+                <td>{{course.duration}}</td>
+                <td>{{course.description}}</td>
+                <td><button class="btn btn-secondary" (click)="EditCourse(course.courseId)" >Edit</button></td>
+                <td><button class="btn btn-danger" (click)="DeleteCourse(course.courseId)" (click)="reloadPage()">Delete</button></td>
+              </tr>
+
+        </tbody>
+   </table>
+  </body>

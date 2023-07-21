@@ -1,0 +1,25 @@
+<h2>Edit Course</h2>
+<div class="container">
+  <div class="row">
+      <div class="col-6 offset-2">
+          
+          <form class="form-group" [formGroup]="EditForm" (ngSubmit)="EditCourse()">
+              <div class="mb-3">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Name" name="name" formControlName="name">
+              </div>
+              <div class="mb-3">
+                  <label class="form-label">Duration</label>
+                  <input type="text" class="form-control" placeholder="Enter Duration" name="duration" formControlName="duration">
+              </div>
+              <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <textarea type="text" class="form-control" placeholder="Enter Description" name="description" formControlName="description"></textarea>
+              </div>
+              <!--check if routerlink works-->
+              <button type="submit" class="btn btn-primary" [disabled]="!EditForm.valid">Submit</button>
+              <button type="button" class="btn btn-warning" style="margin-left: 2px;" routerLink="/">Cancel</button>
+          </form>
+      </div>
+  </div>
+</div>
